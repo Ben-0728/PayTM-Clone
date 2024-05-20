@@ -1,3 +1,5 @@
+import { Schema } from 'zod';
+
 const mongoose = require('mongoose');
 
 mongoose.connect("mongodb+srv://hacker_ben:ivz0Y4XHyZZ6G7OB@hackathon.vchd8bz.mongodb.net/").catch((err) => {console.log("MongoDB error",err)});
@@ -17,6 +19,13 @@ const userSchema = new mongoose.Schema({
     },
 })
 
-const User = mongoose.model('User', userSchema);
+const accSchema = new mongoose.Schema({
+    userId : {type: Schema.Types.ObjectId, ref: 'User'},
+    balance: {type: Number,
+        required: true
+    },
+})
 
-module.exports = User;
+export const User = mongoose.model('User', userSchema);
+export const Account = mongoose.model('Account', accSchema);
+
