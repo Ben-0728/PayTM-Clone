@@ -6,4 +6,4 @@ const accRouter = require('./account.js');
 router.use('/user', userRouter);
 router.use('/account', accRouter);
 
-moduel.exports = router;
+module.exports = router;

@@ -14,8 +14,9 @@ const signupBody = z.object({
 })
 
 router.post('/signup', async (req, res) => {
-    const {success} = signupBody.safeParse(req.body);
-    if (!success) {
+    const result = signupBody.safeParse(req.body);
+    if (!result.success) {
+        console.log(result.error.errors);
         return res.status(400).json({error: "Invalid inputs"});
     }
 
@@ -25,12 +26,19 @@ router.post('/signup', async (req, res) => {
         return res.status(400).json({error: "Username already taken"});
     }
 
+       const first_name = req.body.first_name
+       const last_name = req.body.last_name
+       const username = req.body.username
+       const password = req.body.password
+    console.log(first_name, last_name, username, password);
     const user = await User.create({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        username: req.body.username,
-        password: req.body.password,
+        first_name,
+        last_name,
+        username,
+        password
     });
+
+    console.log(user);
 
     await Account.create({
         userId: user._id,

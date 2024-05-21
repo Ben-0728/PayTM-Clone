@@ -1,21 +1,20 @@
-import { Schema } from 'zod';
-
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-mongoose.connect("mongodb+srv://hacker_ben:ivz0Y4XHyZZ6G7OB@hackathon.vchd8bz.mongodb.net/").catch((err) => {console.log("MongoDB error",err)});
+mongoose.connect("mongodb+srv://hacker_ben:xghP7N2WPfKIUoUt@hackathon.vchd8bz.mongodb.net/").catch((err) => {console.log("MongoDB error",err)});
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     fisrt_name: {type: String,
-        required: true
+        // required: true
     },
     last_name: {type: String,
-        required: true
+        // required: true
     },
     username: {type: String,
-        required: true
+        // required: true
     },
     password: {type: String,
-        required: true
+        // required: true
     },
 })
 
@@ -26,6 +25,7 @@ const accSchema = new mongoose.Schema({
     },
 })
 
-export const User = mongoose.model('User', userSchema);
-export const Account = mongoose.model('Account', accSchema);
+const User = mongoose.model('User', userSchema);
+const Account = mongoose.model('Account', accSchema);
 
+module.exports = {User, Account};

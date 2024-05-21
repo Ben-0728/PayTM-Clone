@@ -1,8 +1,8 @@
-import { Account } from '../db';
-import authMiddleware from '../middleware';
+const { Account } = require('../db');
+const authMiddleware = require('../middleware');
 
 const express = require('express');
-export const router = express.Router();
+const router = express.Router();
 
 router.get('/balance',authMiddleware, async (req, res) => {
     const user = await Account.findOne({userId: req.userId});
@@ -28,3 +28,5 @@ router.post('/transfer', authMiddleware, async (req, res) => {
     }
     res.status(200).json({message: "Transfer successful"});
 })
+
+module.exports = router;
