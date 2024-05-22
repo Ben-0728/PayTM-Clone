@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 mongoose.connect("mongodb+srv://hacker_ben:xghP7N2WPfKIUoUt@hackathon.vchd8bz.mongodb.net/").catch((err) => {console.log("MongoDB error",err)});
 
 const userSchema = new Schema({
-    fisrt_name: {type: String,
+    first_name: {type: String,
         // required: true
     },
     last_name: {type: String,

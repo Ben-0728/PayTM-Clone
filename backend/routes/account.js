@@ -19,9 +19,9 @@ router.post('/transfer', authMiddleware, async (req, res) => {
     if(amount > fromUser.balance) {
         return res.status(400).json({error: "Insufficient balance"});
     }
-    await Account.findByIdAndUpdate(from, { $inc: { balance: -amount } });
+    const red = await Account.findOneAndUpdate({userId: from}, { $inc: { balance: -amount } });
 
-    const success = await Account.findByIdAndUpdate(to, { $inc: { balance: amount } });
+    const success = await Account.findOneAndUpdate({userId: to}, { $inc: { balance: amount } });
     if (!success) {
         await Account.findByIdAndUpdate(from, { $inc: { balance: amount } });
         return res.status(404).json({error: "Invalid account"});
